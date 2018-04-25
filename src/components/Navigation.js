@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link, Redirect } from "react-router-dom";
+import { NavLink, Link, Redirect, withRouter } from "react-router-dom";
 import * as firebase from "firebase";
 
 const NavItem = props => {
@@ -16,30 +16,27 @@ const NavItem = props => {
     );
 }
 
-const LogInNavItem = props => {
-    const pageURI = window.location.pathname + window.location.search
-    const liClassName = (props.path === pageURI) ? "nav-item active" : "nav-item";
-    const aClassName = props.disabled ? "nav-link disabled" : "nav-link"
-    function handleLogoutClick(e) {
-        firebase.auth().signOut().then(function() {
-            // Sign-out successful.
-          }).catch(function(error) {
-            // An error happened.
-          });
-    }
-    if (firebase.auth().currentUser) {
-        return (
-            <NavLink to={{ pathname: "/login" }} className={aClassName} onClick={handleLogoutClick}>
-                Wellcome {firebase.auth().currentUser.email}! Logout!
-            </NavLink>
-        );
-    }
-    return(
-        <NavLink to={{pathname: "/login"}} className={aClassName}>
-            Hi Guess! Login, please
-        </NavLink>
-    );
-}
+const AuthButton = withRouter(
+    ({ history }) =>
+        firebase.auth().currentUser ? (
+            <NavLink to={{ pathname: "/" }} className="nav-link"
+                onClick={() => {
+                    firebase.auth().signOut().then(function () {
+                        // Sign-out successful.
+                        history.push("/");
+                    }).catch(function (error) {
+                        // An error happened.
+                    });
+                }}>
+                Welcome {firebase.auth().currentUser.email}! Sign out
+      </NavLink>
+        ) : (
+                <NavLink to={{ pathname: "/" }} className="nav-link">
+                    Hi Guess, you can login here
+                </NavLink>
+            )
+);
+
 
 class NavDropdown extends React.Component {
     constructor(props) {
@@ -95,7 +92,7 @@ class Navigation extends React.Component {
                             <a className="dropdown-item" href="/">Something else here</a>
                         </NavDropdown>                         */}
                     </ul>
-                    <LogInNavItem />
+                    <AuthButton />
 
                     {/* <form className="form-inline my-2 my-lg-0">
                         <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
