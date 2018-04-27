@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link, Redirect, withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import * as firebase from "firebase";
 
 const NavItem = props => {
@@ -29,7 +29,7 @@ const AuthButton = withRouter(
                     });
                 }}>
                 Welcome {firebase.auth().currentUser.email}! Sign out
-      </NavLink>
+            </NavLink>
         ) : (
                 <NavLink to={{ pathname: "/" }} className="nav-link">
                     Hi Guess, you can login here

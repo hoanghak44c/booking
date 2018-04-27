@@ -1,0 +1,11 @@
+export let appointmentsEventData = [{
+    "Id": 1,
+    "Address" : "Hoang Mai",
+    "ClientName" : "Hoang Ha",
+    "EndTime" : new Date(2018, 5, 29, 13, 0),
+    "ProviderEmail" : "hoanghak44c@gmail.com",
+    "RecurrenceRule" : "FREQ=WEEKLY;INTERVAL=2;BYDAY=MO;COUNT=10",
+    "ServiceNames" : ["Nail", "Spa"],
+    "StaffName" : "nv01",
+    "StartTime" : new Date(2018, 5, 25, 12, 0)
+}]

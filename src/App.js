@@ -51,7 +51,7 @@ class App extends React.Component {
           <Router>
               <div>
                   <Navigation />
-                  <div className="container">
+                  <div className="container-fluid">
                     <PrivateRoute exact path="/" component={Bookings} />            
                     <Route exact path="/login" component={Login} />            
                     <Route path="/about" component={About} />            

@@ -1,11 +1,11 @@
 import React from 'react';
+import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import * as firebase from "firebase";
 
 class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = { username: '', password: ''};
-        this.script = document.createElement("script");
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,19 +32,13 @@ class Register extends React.Component {
 
     componentDidMount() {
 
-        this.script.innerHTML = 'ej.base.enableRipple(true);' +
-
-        // initialize button component
-        'var button = new ej.buttons.Button();' +
-        
-        // Render initialized button.
-        "button.appendTo('#element');";
-
-        document.body.appendChild(this.script);        
+        // do some thing here       
     }
 
     componentWillUnmount() {
-        document.body.removeChild(this.script);
+        
+        // do some thing here
+    
     }
 
     render() {
@@ -54,17 +48,17 @@ class Register extends React.Component {
                     <div className='wrap'>
                         <h4>Register</h4>
                         <div id="input-container">
-                            <div className="e-float-input e-input-group">
+                            <div className="e-float-input">
                                 <input type="text" name="username" value={this.state.username} required onChange={this.handleChange} />
                                 <span className="e-float-line"></span>
                                 <label className="e-float-text">Enter user name </label>
                             </div>
-                            <div className="e-float-input e-input-group">
+                            <div className="e-float-input">
                                 <input type="password" name="password" value={this.state.password} required onChange={this.handleChange} />
                                 <span className="e-float-line"></span>
                                 <label className="e-float-text">Enter password </label>
                             </div>
-                            <button id="element">Register</button>
+                            <ButtonComponent cssClass='e-primary'>Register</ButtonComponent>
                         </div>
                     </div>
                 </form>
