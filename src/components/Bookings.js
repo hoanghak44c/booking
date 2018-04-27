@@ -64,7 +64,7 @@ class Bookings extends React.Component {
             fields: { text: 'text', value: 'value' },
             value: [],
             mode: 'Box',
-            //floatLabelType: 'Always', 
+            floatLabelType: 'Always', 
             placeholder: 'Services'
         });
         this.multiSelectObj.appendTo(inputEle);
