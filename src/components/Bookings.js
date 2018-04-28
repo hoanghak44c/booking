@@ -101,7 +101,7 @@ class Bookings extends React.Component {
                 this.createStaffElement(args);
             }
 
-            if(args.data.Id) {
+            if(args.data.Id && args.data.Services) {
                 this.multiSelectObj.value = args.data.Services.slice();
             } else {
                 this.multiSelectObj.value = [];
