@@ -16,8 +16,16 @@ class Bookings extends React.Component {
         this.appointmentsRef.off();
         this.broadCastAddedEvents = this.broadCastAddedEvents.bind(this);
         this.broadCastChangedEvents = this.broadCastChangedEvents.bind(this);
+        this.broadCastRemovedEvents = this.broadCastRemovedEvents.bind(this);
         this.appointmentsRef.limitToLast(12).on('child_added', this.broadCastAddedEvents);
         this.appointmentsRef.limitToLast(12).on('child_changed', this.broadCastChangedEvents);
+        this.appointmentsRef.limitToLast(12).on('child_removed', this.broadCastRemovedEvents);
+    }
+
+    broadCastRemovedEvents(data) {
+        let val = data.val();
+        this.boundedEvents.splice(this.boundedEvents.findIndex(e => e.Id === val.Id), 1);
+        this.scheduleObj.refreshEvents();
     }
 
     broadCastAddedEvents(data) {
@@ -25,10 +33,8 @@ class Bookings extends React.Component {
         val.key = data.key;
         val.StartTime = new Date(val.StartTime);
         val.EndTime = new Date(val.EndTime);
-        if (this.boundedEvents.findIndex(e => e.Id === val.Id) === -1) {
-            this.boundedEvents.push(val);
-            this.scheduleObj.refreshEvents();
-        }
+        this.boundedEvents.push(val);
+        this.scheduleObj.refreshEvents();
     }
 
     broadCastChangedEvents(data) {
